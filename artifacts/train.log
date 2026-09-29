@@ -1,0 +1,53 @@
+[2/6] Preprocessing and feature engineering
+      train/val/test vehicles: 210/45/45  (36 features)
+[3/6] Training ML models
+      logistic_regression  ROC-AUC=0.9916 PR-AUC=0.9292 F1=0.7557
+      decision_tree        ROC-AUC=0.9454 PR-AUC=0.7604 F1=0.7142
+      random_forest        ROC-AUC=0.9912 PR-AUC=0.9031 F1=0.8022
+      xgboost              ROC-AUC=0.9878 PR-AUC=0.9046 F1=0.8136
+[4/6] Training DL sequence models on 2.14.0 (56,737 windows)
+    lstm
+    epoch  1  loss=0.3681  val PR-AUC=0.9246
+    epoch  2  loss=0.1648  val PR-AUC=0.9213
+    epoch  3  loss=0.1384  val PR-AUC=0.9261
+    epoch  4  loss=0.1264  val PR-AUC=0.9214
+    epoch  5  loss=0.1138  val PR-AUC=0.8942
+    epoch  6  loss=0.1090  val PR-AUC=0.9227
+      lstm                 ROC-AUC=0.9856 PR-AUC=0.9174 F1=0.7578
+    gru
+    epoch  1  loss=0.3507  val PR-AUC=0.9317
+    epoch  2  loss=0.1705  val PR-AUC=0.9314
+    epoch  3  loss=0.1519  val PR-AUC=0.9305
+    epoch  4  loss=0.1383  val PR-AUC=0.9365
+    epoch  5  loss=0.1298  val PR-AUC=0.9283
+    epoch  6  loss=0.1207  val PR-AUC=0.9306
+    epoch  7  loss=0.1073  val PR-AUC=0.9272
+      gru                  ROC-AUC=0.9880 PR-AUC=0.9252 F1=0.7477
+    transformer
+    epoch  1  loss=0.3012  val PR-AUC=0.9246
+    epoch  2  loss=0.1748  val PR-AUC=0.9147
+    epoch  3  loss=0.1530  val PR-AUC=0.9332
+    epoch  4  loss=0.1342  val PR-AUC=0.9300
+    epoch  5  loss=0.1199  val PR-AUC=0.9158
+    epoch  6  loss=0.1214  val PR-AUC=0.9361
+    epoch  7  loss=0.1084  val PR-AUC=0.9211
+    epoch  8  loss=0.1099  val PR-AUC=0.9270
+    epoch  9  loss=0.0963  val PR-AUC=0.9191
+      transformer          ROC-AUC=0.9873 PR-AUC=0.9226 F1=0.7727
+
+Test-set comparison (sorted by PR-AUC):
+                     roc_auc  pr_auc  precision  recall      f1  train_sec
+logistic_regression   0.9916  0.9292     0.6211  0.9646  0.7557     0.3069
+gru                   0.9880  0.9252     0.6088  0.9687  0.7477    24.1284
+transformer           0.9873  0.9226     0.6510  0.9503  0.7727    36.2986
+lstm                  0.9856  0.9174     0.6198  0.9748  0.7578    16.7685
+xgboost               0.9878  0.9046     0.7456  0.8952  0.8136     1.4044
+random_forest         0.9912  0.9031     0.7062  0.9286  0.8022    22.3789
+decision_tree         0.9454  0.7604     0.5781  0.9340  0.7142     2.4490
+
+[5/6] Saving artifacts
+[6/6] Plotting evaluation and SHAP explanations
+/Users/mahuleelahiri/Documents/Code/wipro module 3 /train.py:156: FutureWarning: The NumPy global RNG was seeded by calling `np.random.seed`. In a future version this function will no longer use the global RNG. Pass `rng` explicitly to opt-in to the new behaviour and silence this warning.
+  shap.summary_plot(sv, sample, max_display=20, show=False)
+Done. Models -> /Users/mahuleelahiri/Documents/Code/wipro module 3 /artifacts/models
+      Plots  -> /Users/mahuleelahiri/Documents/Code/wipro module 3 /artifacts/plots
